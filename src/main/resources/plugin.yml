@@ -1,0 +1,10 @@
+name: FMS_Lottery
+version: ${project.version}
+main: me.messiasfms.net.lottery.Main
+authors: [ MessiasFMS ]
+description: A simple lottery event plugin.
+commands:
+  lottery:
+    aliases: loteria
+
+

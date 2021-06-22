@@ -1,0 +1,64 @@
+#Mensagens do evento
+#PlaceHolders:
+# %player - Para indicar o player correspondente
+# %award - Para indicar o premio atual da loteria
+# %adverts - para indicar os anuncios da loteria (Somente funcional na mensagem de loteria aberta)
+# %numberc - para indicar o numero correto
+Messages:
+  CommandList:
+    - "&e[Lottery] Command list"
+    - "&e[Lottery] &fUse /lottery <number> - To participate in the event"
+    - "&e[Lottery] &fUse /lottery start - To force start lottery"
+    - "&e[Lottery] &fUse /lottery cancel - To force stop lottery"
+    - "&e[Lottery] &fUse /lottery reload - To reload config"
+  OpenLottery:
+    - "&e[Lottery] &fThe Lottery IS OPEEENNN!!!"
+    - "&e[Lottery] &fThe award accumulated is %award"
+    - "&e[Lottery] &fTo try your luck use: &e/lottery (number)"
+    - "&e[Lottery] &fRemaining ads : %adverts"
+  NoWinner:
+    - "&e[Lottery] &fThe Lottery is CLOSED :("
+    - "&e[Lottery] &fThe award of %award will be added in the next lottery."
+    - "&e[Lottery] &fThe correct number was: &a%numberc"
+    - "&e[Lottery] &cNobody &fgot this time."
+  PlayerWin:
+    - "&e[Lottery] &fWe have a WINNER!!!"
+    - "&e[Lottery] &fThe player &a%player &ftook it home: &a%award"
+    - "&e[Lottery] &fThe correct number was: &a%numberc"
+    - "&e[Lottery] &fStay tuned for upcoming calls"
+  ClosedLottery: "&e[Lottery] &fThe lottery is not open at the moment."
+  MoneyReceived: "&e[Lottery] &fYou have received your reward."
+  CorrectUseLotteryCmd: "&e[Lottery] usage: /lottery <number>"
+  TryAgain: "&e[Lottery] &fNumber incorrect, try again!"
+  NoNumber: "&e[Lottery] &fSorry, but this is not a number!"
+  NoPermission: "&e[Lottery] &fSorry, but this command does not exist."
+  Admin:
+    LotteryAlreadOpen: "&e[Lottery] &fThe lottery alread open."
+    ClosedLotteryByAdmin: "&e[Lottery] &fThe lottery and the award was cancelled by an admin"
+    ReloadConfig: "&e[Lottery] &fThe configuration file was reloaded successfully"
+
+
+#Outras configurações do evento como: tempo entre os anúncios, prêmio mínimo, prêmio máximo, número mínimo, número máximo.
+Others:
+  #AwardAccumulate: True = acumula o prêmio, False = Não acumula o prêmio
+  AwardAccumulate: true
+  #Award: seta o mínimo de premiação e o máximo de premiação.
+  Award:
+    Min: 1000
+    Max: 10000
+  #Number: Escolhe o mínimo do número correto e o máximo
+  Number:
+    Min: 1
+    Max: 100
+  #Adverts: Escolhe o tanto de anúncios da loteria
+  Adverts: 3
+  #SecondsAdverts: Escolhe o tanto de segundos entre os anúncios da loteria
+  SecondsAdverts: 10
+  #WinCommand: Escolhe o comando que vai ser utilizado quando um player ganha na loteria
+  WinCommand: "money give %player %award"
+
+#Aqui você define as horas que o evento iniciara automaticamente, dias: domingo,segunda,terca,quarta,quinta,sexta e sabado.
+Schedules:
+  - "12:00-terca"
+  - "18:00-terca"
+
