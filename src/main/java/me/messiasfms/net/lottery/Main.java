@@ -1,5 +1,6 @@
 package me.messiasfms.net.lottery;
 
+import lombok.Getter;
 import me.messiasfms.net.lottery.Commands.LotteryCommand;
 import me.messiasfms.net.lottery.Lottery.Lottery;
 import me.messiasfms.net.lottery.Utils.AutomaticStart.CheckStart;
@@ -9,10 +10,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
+@Getter
 public final class Main extends JavaPlugin {
 
     private static Main plugin;
-    private static Lottery lottery;
+    public Lottery lottery;
     ConsoleCommandSender cs = Bukkit.getServer().getConsoleSender();
 
     @Override
@@ -23,7 +25,7 @@ public final class Main extends JavaPlugin {
         cs.sendMessage("§e[FMS_Lottery] §aPlugin successfully enabled. Plugin by: §cMessiasFMS");
         plugin = this;
         lottery = new Lottery();
-        CheckStart.check();
+        new CheckStart();
         getCommand("lottery").setExecutor(new LotteryCommand());
 
     }
@@ -37,7 +39,4 @@ public final class Main extends JavaPlugin {
         return plugin;
     }
 
-    public static Lottery getLottery(){
-        return lottery;
-    }
 }

@@ -1,5 +1,7 @@
 package me.messiasfms.net.lottery.Lottery;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.messiasfms.net.lottery.Main;
 import me.messiasfms.net.lottery.Utils.NumberFormatter;
 import org.bukkit.Bukkit;
@@ -10,6 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Random;
 
+@Getter @Setter
 public class Lottery {
 
     FileConfiguration config = Main.getInstance().getConfig();
@@ -66,7 +69,7 @@ public class Lottery {
             Bukkit.broadcastMessage(pg.replace("&", "§").replace("%player", p.getName()).replace("%award",
                     String.valueOf(format.formatNumber(award))).replace("%numberc", String.valueOf(this.numberC)));
         }
-        Bukkit.dispatchCommand((CommandSender) Bukkit.getConsoleSender(),
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                 config.getString("Others.WinCommand").replace("%player",
                         p.getName()).replace("%award", String.valueOf(award)));
         p.sendMessage(config.getString("Messages.MoneyReceived")
@@ -87,42 +90,6 @@ public class Lottery {
     public void setNumberC() {
         this.numberC = getINumber(config.getInt("Others.Number.Min"),
                 config.getInt("Others.Number.Max"));
-    }
-
-    public void setAward(double award) {
-        this.award = award;
-    }
-
-    public void setNumberC(int numberC) {
-        this.numberC = numberC;
-    }
-
-    public void setOccurring(boolean occurring) {
-        this.occurring = occurring;
-    }
-
-    public void setFinished(boolean finished) {
-        this.finished = finished;
-    }
-
-    public double getAward() {
-        return award;
-    }
-
-    public double getLastAward() {
-        return lastAward;
-    }
-
-    public int getNumberC() {
-        return numberC;
-    }
-
-    public boolean isOccurring() {
-        return occurring;
-    }
-
-    public boolean isFinished() {
-        return finished;
     }
 
     public boolean isCorrectNumber(int numberR){
