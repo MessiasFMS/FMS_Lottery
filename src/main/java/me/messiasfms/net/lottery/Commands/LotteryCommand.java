@@ -25,9 +25,7 @@ public class LotteryCommand implements CommandExecutor {
 
         if (args.length == 0) {
             if (p.hasPermission("lottery.admin")) {
-                for (String li : config.getStringList("Messages.CommandList")) {
-                    p.sendMessage(li.replace("&", "§"));
-                }
+                config.getStringList("Messages.CommandList").forEach(li -> p.sendMessage(li.replace("&", "§")));
                 return true;
             }
             p.sendMessage(config.getString("Messages.CorrectUseLotteryCmd").replace("&", "§"));
@@ -70,23 +68,22 @@ public class LotteryCommand implements CommandExecutor {
                         p.sendMessage(config.getString("Messages.Admin.ReloadConfig").replace("&", "§"));
                         break;
                     default:
-                        throw new IllegalStateException("Unexpected value: " + args[0]);
+                        p.sendMessage(config.getString("Messages.ClosedLottery").replace("&", "§"));
+                        break;
                 }
                 return true;
             } else if (lottery.isOccurring()) {
                 p.sendMessage(config.getString("Messages.NoNumber").replace("&", "§"));
                 return true;
             }
-            if (!lottery.isOccurring()) {
-                p.sendMessage(config.getString("Messages.ClosedLottery").replace("&", "§"));
-                return true;
+            if (lottery.isOccurring()) {
+                int answer = Integer.parseInt(args[0]);
+                if (!lottery.isCorrectNumber(answer)) {
+                    p.sendMessage(config.getString("Messages.TryAgain").replace("&", "§"));
+                    return true;
+                }
+                lottery.playerWin(p);
             }
-            int answer = Integer.parseInt(args[0]);
-            if (!lottery.isCorrectNumber(answer)) {
-                p.sendMessage(config.getString("Messages.TryAgain").replace("&", "§"));
-                return true;
-            }
-            lottery.playerWin(p);
         }
         return true;
     }
