@@ -95,6 +95,8 @@ public class Lottery {
         return r.nextInt(max - min + 1) + min;
     }
 
+
+
     public int getINumber(int min, int max) {
         Random r = new Random();
         return r.nextInt(max - min + 1) + min;
@@ -102,4 +104,8 @@ public class Lottery {
 
     public static boolean isNumber(final String args) {
         try { Integer.parseInt(args);} catch (NumberFormatException e){return false;} return true;}
+
+    public boolean isCorrectNumber(int answer) {
+        return answer == getNumberC();
+    }
 }
