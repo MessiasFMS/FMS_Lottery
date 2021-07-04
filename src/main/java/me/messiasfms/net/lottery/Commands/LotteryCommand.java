@@ -10,9 +10,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class LotteryCommand implements CommandExecutor {
-    
-    FileConfiguration config = Main.getInstance().getConfig();
-    Lottery lottery = Main.getInstance().getLottery();
+
+    private final Main instance = Main.getPlugin(Main.class).getInstance();
+    private final Lottery lottery = instance.getLottery();
+    FileConfiguration config = instance.getConfig();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
@@ -30,8 +31,7 @@ public class LotteryCommand implements CommandExecutor {
                 return true;
             }
             p.sendMessage(config.getString("Messages.CorrectUseLotteryCmd").replace("&", "§"));
-        }
-        if (args.length == 1) {
+        } else {
             if (!Lottery.isNumber(args[0])) {
                 switch (args[0]) {
                     case "start":
@@ -66,7 +66,7 @@ public class LotteryCommand implements CommandExecutor {
                             p.sendMessage(config.getString("Messages.NoPermission").replace("&", "§"));
                             return true;
                         }
-                        Main.getInstance().reloadConfig();
+                        instance.reloadConfig();
                         p.sendMessage(config.getString("Messages.Admin.ReloadConfig").replace("&", "§"));
                         break;
                     default:

@@ -13,16 +13,14 @@ import java.io.File;
 @Getter
 public final class Main extends JavaPlugin {
 
-    private static Main instance;
+    private Main instance;
     public Lottery lottery;
     ConsoleCommandSender cs = Bukkit.getServer().getConsoleSender();
 
     @Override
     public void onEnable() {
-        if (!new File(this.getDataFolder(), "config.yml").exists()){
-            saveDefaultConfig();
-        }
-        cs.sendMessage("§e[FMS_Lottery] §aPlugin successfully enabled. Plugin by: §cMessiasFMS");
+        saveDefaultConfig();
+        getLogger().info("Plugin successfully enabled. Plugin by: MessiasFMS");
         instance = this;
         lottery = new Lottery();
         new CheckStart();
@@ -32,7 +30,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        cs.sendMessage("§e[FMS_Lottery] §aPlugin successfully disabled. Plugin by: §cMessiasFMS");
+        getLogger().info("Plugin successfully disabled. Plugin by: MessiasFMS");
     }
 
 

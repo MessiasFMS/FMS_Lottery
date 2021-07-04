@@ -15,7 +15,8 @@ import java.util.Random;
 @Getter @Setter
 public class Lottery {
 
-    FileConfiguration config = Main.getInstance().getConfig();
+    private final Main instance = Main.getPlugin(Main.class).getInstance();
+    FileConfiguration config = instance.getConfig();
 
     private double award, lastAward;
     private int numberC;
@@ -59,7 +60,7 @@ public class Lottery {
                 }
 
             }
-        }.runTaskTimerAsynchronously(Main.getInstance(), 0, config.getInt("Others.SecondsAdverts")*20L);
+        }.runTaskTimerAsynchronously(instance, 0, config.getInt("Others.SecondsAdverts")*20L);
     }
 
     public void playerWin(Player p) {
