@@ -17,17 +17,19 @@ public class Lottery {
     private final Main instance = Main.getPlugin(Main.class).getInstance();
     FileConfiguration config = instance.getConfig();
 
-    private double award, lastAward;
+    private double award;
+    private double lastAward;
     private int numberC;
-    private boolean occurring, finished;
+    private boolean occurring;
+    private boolean finished;
 
     NumberFormatter format = new NumberFormatter();
 
     public void start(){
-        this.setAward();
-        this.setNumberC();
-        this.setFinished(false);
-        this.setOccurring(true);
+        setAward();
+        setNumberC();
+        setFinished(false);
+        setOccurring(true);
         new BukkitRunnable() {
 
             int adverts = config.getInt("Others.Adverts");
@@ -65,8 +67,8 @@ public class Lottery {
     }
 
     public void playerWin(Player p) {
-        this.setOccurring(false);
-        this.setFinished(true);
+        setOccurring(false);
+        setFinished(true);
         config.getStringList("Messages.PlayerWin").forEach(pg -> Bukkit.broadcastMessage(pg.replace("&", "§").replace("%player", p.getName()).replace("%award",
                 String.valueOf(format.formatNumber(award))).replace("%numberc", String.valueOf(this.numberC))));
 
@@ -77,7 +79,7 @@ public class Lottery {
                 .replace("&", "§").replace("%award", String.valueOf(award + lastAward)));
 
         setLastAward(0);
-        this.numberC = 0;
+        setNumberC(0);
     }
 
     public void setAward() {
