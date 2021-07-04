@@ -13,7 +13,7 @@ import java.io.File;
 @Getter
 public final class Main extends JavaPlugin {
 
-    private static Main plugin;
+    private static Main instance;
     public Lottery lottery;
     ConsoleCommandSender cs = Bukkit.getServer().getConsoleSender();
 
@@ -23,7 +23,7 @@ public final class Main extends JavaPlugin {
             saveDefaultConfig();
         }
         cs.sendMessage("§e[FMS_Lottery] §aPlugin successfully enabled. Plugin by: §cMessiasFMS");
-        plugin = this;
+        instance = this;
         lottery = new Lottery();
         new CheckStart();
         getCommand("lottery").setExecutor(new LotteryCommand());
@@ -35,8 +35,5 @@ public final class Main extends JavaPlugin {
         cs.sendMessage("§e[FMS_Lottery] §aPlugin successfully disabled. Plugin by: §cMessiasFMS");
     }
 
-    public static Main getInstance(){
-        return plugin;
-    }
 
 }
