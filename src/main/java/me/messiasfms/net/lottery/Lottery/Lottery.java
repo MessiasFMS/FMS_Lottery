@@ -5,7 +5,6 @@ import lombok.Setter;
 import me.messiasfms.net.lottery.Main;
 import me.messiasfms.net.lottery.Utils.NumberFormatter;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;

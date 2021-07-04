@@ -8,8 +8,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-
 @Getter
 public final class Main extends JavaPlugin {
 
