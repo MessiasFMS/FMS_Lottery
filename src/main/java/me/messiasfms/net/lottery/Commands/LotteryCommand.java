@@ -73,10 +73,9 @@ public class LotteryCommand implements CommandExecutor {
                         throw new IllegalStateException("Unexpected value: " + args[0]);
                 }
                 return true;
-            } else {
-                if (lottery.isOccurring()) {
-                    p.sendMessage(config.getString("Messages.NoNumber").replace("&", "§"));
-                }
+            } else if (lottery.isOccurring()) {
+                p.sendMessage(config.getString("Messages.NoNumber").replace("&", "§"));
+                return true;
             }
             if (!lottery.isOccurring()) {
                 p.sendMessage(config.getString("Messages.ClosedLottery").replace("&", "§"));
