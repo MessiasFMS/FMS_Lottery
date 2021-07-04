@@ -38,16 +38,18 @@ public class Lottery {
                 }
                 if (!isFinished()){
                     if (adverts > 0) {
-                        for (final String li : config.getStringList("Messages.OpenLottery")) {
-                            Bukkit.broadcastMessage(li.replace("&", "§").replace("%award", String.valueOf(format.formatNumber(award)))
-                                    .replace("%adverts", String.valueOf(this.adverts)));
-                        }
+
+                      config.getStringList("Messages.OpenLottery").forEach(li -> Bukkit.broadcastMessage(li.replace("&", "§")
+                              .replace("%award", String.valueOf(format.formatNumber(award)))
+                                    .replace("%adverts", String.valueOf(this.adverts))));
+
                         adverts--;
                     } else {
                         cancel();
-                        for (final String lsv : config.getStringList("Messages.NoWinner")) {
-                            Bukkit.broadcastMessage(lsv.replace("&", "§").replace("%award", String.valueOf(format.formatNumber(award))).replace("%numberc", String.valueOf(numberC)));
-                        }
+                      config.getStringList("Messages.NoWinner").forEach(lsv -> Bukkit.broadcastMessage(lsv.replace("&", "§")
+                              .replace("%award", String.valueOf(format.formatNumber(award)))
+                              .replace("%numberc", String.valueOf(numberC))));
+
                         if (config.getBoolean("Others.AwardAccumulate")) {
                             setLastAward(award);
                         }
@@ -65,15 +67,15 @@ public class Lottery {
     public void playerWin(Player p) {
         this.setOccurring(false);
         this.setFinished(true);
-        for (final String pg : config.getStringList("Messages.PlayerWin")) {
-            Bukkit.broadcastMessage(pg.replace("&", "§").replace("%player", p.getName()).replace("%award",
-                    String.valueOf(format.formatNumber(award))).replace("%numberc", String.valueOf(this.numberC)));
-        }
+        config.getStringList("Messages.PlayerWin").forEach(pg -> Bukkit.broadcastMessage(pg.replace("&", "§").replace("%player", p.getName()).replace("%award",
+                String.valueOf(format.formatNumber(award))).replace("%numberc", String.valueOf(this.numberC))));
+
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                 config.getString("Others.WinCommand").replace("%player",
                         p.getName()).replace("%award", String.valueOf(award)));
         p.sendMessage(config.getString("Messages.MoneyReceived")
                 .replace("&", "§").replace("%award", String.valueOf(award + lastAward)));
+
         setLastAward(0);
         this.numberC = 0;
     }
@@ -83,17 +85,9 @@ public class Lottery {
                 config.getInt("Others.Award.Max")) + lastAward;
     }
 
-    public void setLastAward(double lastAward) {
-        this.lastAward = lastAward;
-    }
-
     public void setNumberC() {
         this.numberC = getINumber(config.getInt("Others.Number.Min"),
                 config.getInt("Others.Number.Max"));
-    }
-
-    public boolean isCorrectNumber(int numberR){
-        return numberR == this.numberC;
     }
 
     public double getDNumber(int min, int max){
@@ -107,12 +101,5 @@ public class Lottery {
     }
 
     public static boolean isNumber(final String args) {
-        try {
-            Integer.parseInt(args);
-        }
-        catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
+        try { Integer.parseInt(args);} catch (NumberFormatException e){return false;} return true;}
 }
