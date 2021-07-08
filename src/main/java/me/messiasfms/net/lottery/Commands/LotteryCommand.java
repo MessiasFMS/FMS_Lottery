@@ -68,12 +68,13 @@ public class LotteryCommand implements CommandExecutor {
                         p.sendMessage(config.getString("Messages.Admin.ReloadConfig").replace("&", "§"));
                         break;
                     default:
-                        p.sendMessage(config.getString("Messages.ClosedLottery").replace("&", "§"));
+                        if (!lottery.isOccurring()) {
+                            p.sendMessage(config.getString("Messages.ClosedLottery").replace("&", "§"));
+                            break;
+                        }
+                        p.sendMessage(config.getString("Messages.NoNumber").replace("&", "§"));
                         break;
                 }
-                return true;
-            } else if (lottery.isOccurring()) {
-                p.sendMessage(config.getString("Messages.NoNumber").replace("&", "§"));
                 return true;
             }
             if (lottery.isOccurring()) {
